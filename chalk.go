@@ -16,9 +16,66 @@ type Color struct {
 	text    []interface{}
 }
 
+func (c Color) _formatting() string {
+	var parts []string
+	var ext string
+
+	if c.bgcolor > 0 {
+		parts = append(parts, fmt.Sprintf("%d", c.bgcolor))
+	}
+	if c.color > 0 {
+		parts = append(parts, fmt.Sprintf("%d", c.color))
+	}
+	if c.style > 0 {
+		parts = append(parts, fmt.Sprintf("%d", c.style))
+	}
+
+	ext = strings.Join(parts[:], ";")
+	return "\u001b[" + ext + "m"
+}
+
+func (c Color) Print(a ...any) (int, error) {
+	items := append([]any{c._formatting()}, a...)
+	items = append(items, []any{Reset()}...)
+	return fmt.Print(items...)
+}
+func (c Color) Printf(str string, a ...any) (int, error) {
+	text := strings.Join([]string{
+		c._formatting(),
+		str,
+		Reset(),
+	}, "")
+	return fmt.Printf(text, a...)
+}
+func (c Color) Println(a ...any) (int, error) {
+	items := append([]any{c._formatting()}, a...)
+	items = append(items, []any{Reset()}...)
+	return fmt.Println(items...)
+}
+
+func (c Color) Sprint(a ...any) string {
+	items := append([]any{c._formatting()}, a...)
+	items = append(items, []any{Reset()}...)
+	return fmt.Sprint(items...)
+}
+func (c Color) Sprintf(str string, a ...any) string {
+	text := strings.Join([]string{
+		c._formatting(),
+		str,
+		Reset(),
+	}, "")
+	return fmt.Sprintf(text, a...)
+}
+func (c Color) Sprintln(a ...any) string {
+	items := append([]any{c._formatting()}, a...)
+	items = append(items, []any{Reset()}...)
+	return fmt.Sprintln(items...)
+}
+
 func (c Color) String() string {
 	var ext string
 	var parts []string
+	fmt.Println()
 
 	if c.bgcolor > 0 {
 		parts = append(parts, fmt.Sprintf("%d", c.bgcolor))
