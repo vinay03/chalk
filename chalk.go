@@ -35,73 +35,31 @@ func (c Color) _formatting() string {
 }
 
 func (c Color) Print(a ...any) (int, error) {
-	items := append([]any{c._formatting()}, a...)
-	items = append(items, []any{Reset()}...)
-	return fmt.Print(items...)
+	return fmt.Print(c._formatting() + fmt.Sprint(a...) + Reset())
 }
 func (c Color) Printf(str string, a ...any) (int, error) {
-	text := strings.Join([]string{
-		c._formatting(),
-		str,
-		Reset(),
-	}, "")
-	return fmt.Printf(text, a...)
+	return fmt.Printf(c._formatting()+str+Reset(), a...)
 }
 func (c Color) Println(a ...any) (int, error) {
-	items := append([]any{c._formatting()}, a...)
-	items = append(items, []any{Reset()}...)
-	return fmt.Println(items...)
+	return fmt.Print(c._formatting() + fmt.Sprintln(a...) + Reset())
 }
 
 func (c Color) Sprint(a ...any) string {
-	items := append([]any{c._formatting()}, a...)
-	items = append(items, []any{Reset()}...)
-	return fmt.Sprint(items...)
+	return c._formatting() + fmt.Sprint(a...) + Reset()
 }
 func (c Color) Sprintf(str string, a ...any) string {
-	text := strings.Join([]string{
-		c._formatting(),
-		str,
-		Reset(),
-	}, "")
-	return fmt.Sprintf(text, a...)
+	return fmt.Sprintf(c._formatting()+str+Reset(), a...)
 }
 func (c Color) Sprintln(a ...any) string {
-	items := append([]any{c._formatting()}, a...)
-	items = append(items, []any{Reset()}...)
-	return fmt.Sprintln(items...)
+	return c._formatting() + fmt.Sprintln(a...) + Reset()
 }
 
 func (c Color) String() string {
-	var ext string
-	var parts []string
-	fmt.Println()
-
-	if c.bgcolor > 0 {
-		parts = append(parts, fmt.Sprintf("%d", c.bgcolor))
-	}
-	if c.color > 0 {
-		parts = append(parts, fmt.Sprintf("%d", c.color))
-	}
-	if c.style > 0 {
-		parts = append(parts, fmt.Sprintf("%d", c.style))
-	}
-
-	ext = strings.Join(parts[:], ";")
-
-	returnString := "\u001b[" + ext + "m"
-
+	returnStr := c._formatting()
 	if len(c.text) > 0 {
-		for _, item := range c.text {
-			switch f := item.(type) {
-			default:
-				returnString += fmt.Sprint(f)
-			}
-		}
-		returnString += Reset()
+		returnStr += c.Sprint(c.text...) + Reset()
 	}
-
-	return returnString
+	return returnStr
 }
 
 func (c Color) Apply(msgs ...interface{}) Color {
@@ -325,7 +283,7 @@ func (c *Color) BgWhiteLight(msgs ...interface{}) *Color {
 
 // For all reset. BackgroundColor and TextColor
 func Reset() string {
-	return fmt.Sprintf("\033[%dm", 0)
+	return "\033[0m"
 }
 
 func newColor() *Color {

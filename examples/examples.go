@@ -8,13 +8,22 @@ import (
 
 func main() {
 
-	chalk.Blue().Print("Vinay")
-	chalk.Red().Printf("Hi %s,", "Vinay")
-	chalk.Blue().Println("Jeurkar")
+	chalk.Yellow().Print("Vinay\n")
+	chalk.Red().Printf("Hi %s,\n", "Vinay")
+	chalk.Yellow().Println("Jeurkar")
 
-	fmt.Print(chalk.Blue().Sprint("Vinay"))
-	fmt.Print(chalk.Red().Sprintf("Hi %s,", "Vinay"))
-	fmt.Print(chalk.Blue().Sprintln("Jeurkar"))
+	fmt.Print(chalk.Yellow().Sprint("Vinay"), "\n")
+	fmt.Print(chalk.Red().Sprintf("Hi %s,", "Vinay"), "\n")
+	fmt.Print(chalk.Yellow().Sprintln("Jeurkar"))
+
+	SuccessFormatting := chalk.Green()
+	SuccessFormatting.Println("Completed Successfully")
+
+	SuccessMessage := chalk.Green().Bold("SUCCESS!!")
+	fmt.Println(SuccessMessage)
+
+	ErrorFormatting := chalk.Red()
+	ErrorFormatting.Println("Failed to execute. Try again!")
 
 	// // Colors
 	// fmt.Println("\n> Colors")
@@ -73,13 +82,13 @@ func main() {
 
 	// // Reusable configurations
 	// fmt.Println("\n> Reusable Configurations")
-	// SuccessMessage := chalk.Green().Bold("SUCCESS : ")
-	// WarningMessage := chalk.YellowLight().Bold("WARNING : ")
-	// ErrorMessage := chalk.RedLight().Bold("ERROR   : ")
+	// SuccessMessage2 := chalk.Green().Bold("SUCCESS : ")
+	// WarningMessage2 := chalk.YellowLight().Bold("WARNING : ")
+	// ErrorMessage2 := chalk.RedLight().Bold("ERROR   : ")
 
-	// fmt.Println(SuccessMessage.Apply("Completed successfully"))
-	// fmt.Println(SuccessMessage.Apply("Process Complete"))
-	// fmt.Println(WarningMessage.Apply("Call Deprecated"))
-	// fmt.Println(ErrorMessage.Apply("Fatal error ocurred"))
+	// fmt.Println(SuccessMessage2.Apply("Completed successfully"))
+	// fmt.Println(SuccessMessage2.Apply("Process Complete"))
+	// fmt.Println(WarningMessage2.Apply("Call Deprecated"))
+	// fmt.Println(ErrorMessage2.Apply("Fatal error ocurred"))
 
 }
