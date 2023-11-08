@@ -175,7 +175,7 @@ func main() {
 	fmt.Println("All these lines ")
 	fmt.Println("will be printed in ")
 	fmt.Println("Green")
-	fmt.Print(chalk.Reset())
+	fmt.Print(chalk.Reset()) // Resets all the formatting
 }
 ```
 `Output:`
