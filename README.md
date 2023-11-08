@@ -2,90 +2,189 @@
 
 Chalk is a Go Package which can be used for making terminal output more vibrant with text colors, text styles and background colors.
 
+### Mininum Requirements
+`Go v1.18`
+
 ### Documentation
-Check out godoc for some example usage: http://godoc.org/github.com/golang-demos/chalk
+Check out godoc for some example usage: http://godoc.org/github.com/vinay03/chalk
 
 
-### Example Code
-[ExampleCode](examples/examples.go)
+### Syntax
+```
+chalk[.<TextColor>()][.<TextStyle>()][.<BackgroundColor>()]
+```
 
-### Example Output
-![SampleOutput](images/sample_output.png)
+### Examples
 
-
-## Colors
-| Colors       | TextColor       | Background-Color       |
-|--------------|--------------|--------------|
-| Black        | `chalk.Black("Black-Text")` | `chalk.BgBlack("Black-Background")` |
-| BlackLight   | `chalk.BlackLight("BlackLight-Text")` | `chalk.BgBlackLight("BlackLight-Background")` |
-| Red          | `chalk.Red("Red-Text")` | `chalk.BgRed("Red-Background")` |
-| RedLight     | `chalk.RedLight("RedLight-Text")` | `chalk.BgRedLight("RedLight-Background")` |
-| Green        | `chalk.Green("Green-Text")` | `chalk.BgGreen("Green-Background")` |
-| GreenLight   | `chalk.GreenLight("GreenLight-Text")` | `chalk.BgGreenLight("GreenLight-Background")` |
-| Yellow       | `chalk.Yellow("Yellow-Text")` | `chalk.BgYellow("Yellow-Background")` |
-| YellowLight  | `chalk.YellowLight("YellowLight-Text")` | `chalk.BgYellowLight("YellowLight-Background")` |
-| Blue         | `chalk.Blue("Blue-Text")` | `chalk.BgBlue("Blue-Background")` |
-| BlueLight    | `chalk.BlueLight("BlueLight-Text")` | `chalk.BgBlueLight("BlueLight-Background")` |
-| Magenta      | `chalk.Magenta("Magenta-Text")` | `chalk.BgMagenta("Magenta-Background")` |
-| MagentaLight | `chalk.MagentaLight("MagentaLight-Text")` | `chalk.BgMagentaLight("MagentaLight-Background")` |
-| Cyan         | `chalk.Cyan("Cyan-Text")` | `chalk.BgCyan("Cyan-Background")` |
-| CyanLight    | `chalk.CyanLight("CyanLight-Text")` | `chalk.BgCyanLight("CyanLight-Background")` |
-| White        | `chalk.White("White-Text")` | `chalk.BgWhite("White-Background")` |
-| WhiteLight   | `chalk.WhiteLight("WhiteLight-Text")` | `chalk.BgWhiteLight("WhiteLight-Background")` |
-
-
-## Basic Formatting
-| Formatting    | Use          |
-|---------------|--------------|
-| Bold  | `chalk.Bold("Bold-Text")` |
-| Dim  | `chalk.Dim("Dim-Text")` |
-| Italic  | `chalk.Italic("Italic-Text")` |
-| Underline  | `chalk.Underline("Underline-Text")` |
-| Inverse  | `chalk.Inverse("Inverse-Text")` |
-| Hidden  | `chalk.Hidden("Hidden-Text")` |
-| Strikethrough  | `chalk.Strikethrough("Strikethrough-Text")` |
-
-
-## Sample Code
+#### 1. Text Colors
 ```go
 package main
+import (
+	"github.com/vinay03/chalk"
+)
+func main() {
+	chalk.Yellow().Println("Yellow-Text")
+	chalk.Red().Println("Red-Text")
+	chalk.GreenLight().Println("GreenLight-Text")
+	chalk.Cyan().Println("Cyan-Text")
+}
+```
+`Output:`
 
+![TextColors](images/text-colors.png)
+##### More Text Colors
+| TextColor       | Syntax       |
+|--------------|--------------|
+| Black        | `chalk.Black()` |
+| BlackLight   | `chalk.BlackLight()` |
+| Red          | `chalk.Red()` |
+| RedLight     | `chalk.RedLight()` |
+| Green        | `chalk.Green()` |
+| GreenLight   | `chalk.GreenLight()` |
+| Yellow       | `chalk.Yellow()` |
+| YellowLight  | `chalk.YellowLight()` |
+| Blue         | `chalk.Blue()` |
+| BlueLight    | `chalk.BlueLight()` |
+| Magenta      | `chalk.Magenta()` |
+| MagentaLight | `chalk.MagentaLight()` |
+| Cyan         | `chalk.Cyan()` |
+| CyanLight    | `chalk.CyanLight()` |
+| White        | `chalk.White()` |
+| WhiteLight   | `chalk.WhiteLight()` |
+
+
+#### 2. Text Styles
+```go
+package main
+import (
+	"github.com/vinay03/chalk"
+)
+func main() {
+	chalk.Bold().Println("Bold-Text")
+	chalk.Italic().Println("Italic-Text")
+	chalk.Underline().Println("Underline-Text")
+}
+```
+`Output:`
+
+![TextStyles](images/text-styles.png)
+##### More Text Styles
+| Style    | Syntax          |
+|---------------|--------------|
+| Bold  | `chalk.Bold()` |
+| Dim  | `chalk.Dim()` |
+| Italic  | `chalk.Italic()` |
+| Underline  | `chalk.Underline()` |
+| Inverse  | `chalk.Inverse()` |
+| Hidden  | `chalk.Hidden()` |
+| Strikethrough  | `chalk.Strikethrough()` |
+
+#### 3. Background Colors
+```go
+package main
+import (
+	"github.com/vinay03/chalk"
+)
+func main() {
+	chalk.BgRed().Println("Text-on-Red-Background")
+	chalk.BgMagenta().Println("Text-on-Magenta-Background")
+	chalk.BgBlue().Println("Text-on-Blue-Background")
+}
+```
+`Output:`
+
+![BackgroundColors](images/background-colors.png)
+##### More Background Colors
+| Background-Color    | Syntax       |
+|--------------|--------------|
+| Black        | `chalk.BgBlack()` |
+| BlackLight   | `chalk.BgBlackLight()` |
+| Red          | `chalk.BgRed()` |
+| RedLight     | `chalk.BgRedLight()` |
+| Green        | `chalk.BgGreen()` |
+| GreenLight   | `chalk.BgGreenLight()` |
+| Yellow       | `chalk.BgYellow()` |
+| YellowLight  | `chalk.BgYellowLight()` |
+| Blue         | `chalk.BgBlue()` |
+| BlueLight    | `chalk.BgBlueLight()` |
+| Magenta      | `chalk.BgMagenta()` |
+| MagentaLight | `chalk.BgMagentaLight()` |
+| Cyan         | `chalk.BgCyan()` |
+| CyanLight    | `chalk.BgCyanLight()` |
+| White        | `chalk.BgWhite()` |
+| WhiteLight   | `chalk.BgWhiteLight()` |
+
+
+#### 4. Formatting Combinations
+```go
+package main
+import (
+	"github.com/vinay03/chalk"
+)
+func main() {
+	chalk.Black().Bold().BgRed().Println("Black-and-Bold-Text-on-Red-Background")
+	chalk.Black().Italic().BgBlue().Println("Black-and-Italic-Text-on-Blue-Background")
+}
+```
+`Output:`
+
+![FormattingCombinations](images/formatting-combinations.png)
+
+#### 5. Pre-defined Format
+```go
+package main
+import (
+	"github.com/vinay03/chalk"
+)
+func main() {
+	SuccessFormatting := chalk.Green()
+	SuccessFormatting.Println("Completed Successfully")
+	ErrorFormatting := chalk.Red()
+	ErrorFormatting.Println("Failed to execute. Try again!")
+}
+```
+`Output:`
+
+![PredefinedFormats](images/predefined-formats.png)
+
+#### 6. Pre-formated Text
+```go
+package main
 import (
 	"fmt"
-
-	"github.com/golang-demos/chalk"
+	"github.com/vinay03/chalk"
 )
-
 func main() {
-	// Colors
-	fmt.Println(chalk.BlackLight("BlackLight-Text"))
-	fmt.Println(chalk.Blue("Blue-Text"))
-
-	// Basic Formatting
-	fmt.Println(chalk.Underline("Underline-Text"))
-	fmt.Println(chalk.Bold("Bold-Text"))
-
-	// Background Coloring
-	fmt.Println(chalk.BgYellow("Yellow-Background-Text"))
-
-	// Mixed
-	fmt.Println(chalk.Red().Italic("Red Italic Text"))
-	fmt.Println(chalk.Green().Strikethrough("Green Strikethrough text"))
-	fmt.Println(chalk.Cyan().Underline().BgBlackLight("Cyan Underline text on BlackLight Background"))
-	fmt.Println(chalk.Yellow().BgRed().Inverse("Yellow text on Red background with inverted colors"))
-
-	// For Existing Code
-	fmt.Print(chalk.Green())
-	fmt.Println("Data Sent Successfully")
-	fmt.Print(chalk.Reset())
-
-	// Reusable Configurations
-	SuccessMessage := chalk.Green().Bold("SUCCESS : ")
-	fmt.Println(SuccessMessage.Apply("Completed successfully"))
-	fmt.Println(SuccessMessage.Apply("Process Complete"))
+	SuccessMessagePrefix := chalk.Green().Bold().Sprint("SUCCESS :")
+	fmt.Println(SuccessMessagePrefix, "Process completed successfully.")
 }
-
 ```
+`Output:`
+
+![PredefinedFormattedText](images/predefined-formatted-text.png)
+
+#### 7. Wrap Formating 
+```go
+package main
+import (
+	"fmt"
+	"github.com/vinay03/chalk"
+)
+func main() {
+	fmt.Print(chalk.Green()) // Starts the formatting
+	fmt.Println("All these lines ")
+	fmt.Println("will be printed in ")
+	fmt.Println("Green")
+	fmt.Print(chalk.Reset())
+}
+```
+`Output:`
+
+![WrapFormatting](images/wrap-formatting.png)
+
+
+### More Examples
+[examples/examples.go](examples/examples.go)
 
 
 ## Source

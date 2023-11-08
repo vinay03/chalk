@@ -41,7 +41,12 @@ func (c Color) Printf(str string, a ...any) (int, error) {
 	return fmt.Printf(c._formatting()+str+Reset(), a...)
 }
 func (c Color) Println(a ...any) (int, error) {
-	return fmt.Print(c._formatting() + fmt.Sprintln(a...) + Reset())
+	printText := fmt.Sprintln(a...)
+	length := len(printText)
+	if length > 0 && printText[length-1] == '\n' {
+		printText = printText[:length-1]
+	}
+	return fmt.Print(c._formatting() + printText + Reset() + "\n")
 }
 
 func (c Color) Sprint(a ...any) string {
@@ -51,7 +56,12 @@ func (c Color) Sprintf(str string, a ...any) string {
 	return fmt.Sprintf(c._formatting()+str+Reset(), a...)
 }
 func (c Color) Sprintln(a ...any) string {
-	return c._formatting() + fmt.Sprintln(a...) + Reset()
+	printText := fmt.Sprintln(a...)
+	length := len(printText)
+	if length > 0 && printText[length-1] == '\n' {
+		printText = printText[:length-1]
+	}
+	return c._formatting() + printText + Reset() + "\n"
 }
 
 func (c Color) String() string {
@@ -283,7 +293,7 @@ func (c *Color) BgWhiteLight(msgs ...interface{}) *Color {
 
 // For all reset. BackgroundColor and TextColor
 func Reset() string {
-	return "\033[0m"
+	return fmt.Sprintf("\033[%dm", 0)
 }
 
 func newColor() *Color {
