@@ -16,9 +16,9 @@ type Color struct {
 	text    []interface{}
 }
 
-func (c Color) String() string {
-	var ext string
+func (c Color) _formatting() string {
 	var parts []string
+	var ext string
 
 	if c.bgcolor > 0 {
 		parts = append(parts, fmt.Sprintf("%d", c.bgcolor))
@@ -31,20 +31,45 @@ func (c Color) String() string {
 	}
 
 	ext = strings.Join(parts[:], ";")
+	return "\u001b[" + ext + "m"
+}
 
-	returnString := "\u001b[" + ext + "m"
-
-	if len(c.text) > 0 {
-		for _, item := range c.text {
-			switch f := item.(type) {
-			default:
-				returnString += fmt.Sprint(f)
-			}
-		}
-		returnString += Reset()
+func (c Color) Print(a ...any) (int, error) {
+	return fmt.Print(c._formatting() + fmt.Sprint(a...) + Reset())
+}
+func (c Color) Printf(str string, a ...any) (int, error) {
+	return fmt.Printf(c._formatting()+str+Reset(), a...)
+}
+func (c Color) Println(a ...any) (int, error) {
+	printText := fmt.Sprintln(a...)
+	length := len(printText)
+	if length > 0 && printText[length-1] == '\n' {
+		printText = printText[:length-1]
 	}
+	return fmt.Print(c._formatting() + printText + Reset() + "\n")
+}
 
-	return returnString
+func (c Color) Sprint(a ...any) string {
+	return c._formatting() + fmt.Sprint(a...) + Reset()
+}
+func (c Color) Sprintf(str string, a ...any) string {
+	return fmt.Sprintf(c._formatting()+str+Reset(), a...)
+}
+func (c Color) Sprintln(a ...any) string {
+	printText := fmt.Sprintln(a...)
+	length := len(printText)
+	if length > 0 && printText[length-1] == '\n' {
+		printText = printText[:length-1]
+	}
+	return c._formatting() + printText + Reset() + "\n"
+}
+
+func (c Color) String() string {
+	returnStr := c._formatting()
+	if len(c.text) > 0 {
+		returnStr += c.Sprint(c.text...) + Reset()
+	}
+	return returnStr
 }
 
 func (c Color) Apply(msgs ...interface{}) Color {

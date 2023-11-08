@@ -1,3 +1,3 @@
-module github.com/golang-demos/chalk
+module github.com/vinay03/chalk
 
-go 1.17
+go 1.18

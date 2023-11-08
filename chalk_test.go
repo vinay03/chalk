@@ -1,6 +1,7 @@
 package chalk
 
 import (
+	"encoding/hex"
 	"testing"
 )
 
@@ -31,7 +32,7 @@ func Test_BasicColors(t *testing.T) {
 
 	for _, test := range colorTests {
 		if test.Actual != test.Expected {
-			t.Error("Expected modifier is not same as actual string for Color : " + test.ColorName)
+			t.Error("Expected modifier is not same as actual string for Color : " + test.ColorName + ", Actual: " + hex.EncodeToString([]byte(test.Actual)) + ", Expected: " + hex.EncodeToString([]byte(test.Expected)))
 		}
 	}
 }
